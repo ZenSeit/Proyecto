@@ -28,6 +28,7 @@ public class MainToRun {
             System.out.println("3.Ingresar saldo");
             System.out.println("4.Buscar contacto");
             System.out.println("5.Modificar contacto");
+            System.out.println("6.Transferir saldo a otro contacto");
             System.out.println("0.Finalizar proceso");
             Scanner op1 = new Scanner(System.in);
             Scanner emailt = new Scanner(System.in);
@@ -104,6 +105,7 @@ public class MainToRun {
                             System.out.println("Ingresa el telefono: ");
                             String tet = emailt.nextLine();
                             String t = met.findtel(tet, Liscontel);
+                            
                             System.out.println(met.findUS(t, Liscon, Liscontel));
                             break;
 
@@ -159,7 +161,38 @@ public class MainToRun {
                     } else {
                         System.out.println("Correo no registrado en el sistema");
                     }
+                    Lisconemail.clear();
+                    Liscontel.clear();
+                    for (Contacto con : Liscon){
+                        Lisconemail.add(con.getEmail());
+                        Liscontel.add(con.getTelCon());
+                    }
                     break;
+
+                case 6:
+                    System.out.println("Ingresa el correo del usuario que transfiere el saldo: ");
+                    String mailt = emailt.nextLine();
+                    String ema2="";
+                    if (Lisconemail.contains(mailt)) {
+                        int pos = Lisconemail.indexOf(mailt);
+                        Contacto temp1=Liscon.get(pos);
+                        do{
+                           System.out.println("Ingresa el correo del usuario que recibe el saldo: ");
+                        ema2 = emailt.nextLine(); 
+                        }while (!Lisconemail.contains(ema2));
+                        int pos2 = Lisconemail.indexOf(ema2);
+                        Contacto temp2=Liscon.get(pos2);
+                        temp2.setSaldo(temp1.getSaldo());
+                        temp1.setSaldo(-temp1.getSaldo());
+                        
+                        
+                    } else {
+                        System.out.println("Correo no registrado en el sistema");
+                    }
+                    System.out.println("Transferencia exitosa");
+                    
+                    break;
+
                 default:
                     System.out.println("Seleccion invalida.");
             }

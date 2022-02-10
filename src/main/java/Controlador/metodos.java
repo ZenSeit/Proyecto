@@ -61,7 +61,7 @@ public class metodos {
     public String findtel(String tel, ArrayList<String> lisemail) {
 
         while (!lisemail.contains(tel)) {
-            System.out.println("El telefono ya se encuentra registrado. Ingresa otro diferente por favor: ");
+            System.out.println("El telefono no se encuentra registrado.");
             tel = indou.nextLine();
         }
         return tel;
